@@ -3,11 +3,14 @@
 #include <cstdio>
 #include <iostream>
 
+extern void cuda_check();
+
 int main() {
     mnist data;
     data.load("../data/train-images-idx3-ubyte", 
               "../data/train-labels-idx1-ubyte");
 
+    cuda_check();
     neural_network net;
     
     for (u32 epoch = 0; epoch < 10; epoch++) {
@@ -16,7 +19,6 @@ int main() {
         }
         printf("epoch %d done\n", epoch);
     }
-
 
     for (u32 n = 0; n < 10; n++) {
         matrix predict = net.forward_pass(data.images[n]);
