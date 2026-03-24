@@ -1,6 +1,7 @@
 #include "neural_network.h"
-
 #include <iostream>
+
+extern void cuda_relu(float* A, int N);
 
 neural_network::neural_network()
     : W0(128, 784), b0(128, 1), W1(10, 128), b1(10, 1),
@@ -29,6 +30,14 @@ matrix neural_network::forward_pass(const matrix& input) {
 
 void neural_network::train(const matrix& input, const matrix& y_true, f32 lr) {
     // forward pass
+    u32 malloc_size = 0;
+
+    malloc_size += input.rows * input.cols;
+    malloc_size += W0.rows * W0.cols;
+    malloc_size += W0.rows;
+    malloc_size += W1.rows * W1.cols;
+    malloc_size += W1.rows;
+
     Z0 = W0 * input;
     for (u32 i = 0; i < 128; i++) Z0.data[i] += b0.data[i];
     A0 = Z0;

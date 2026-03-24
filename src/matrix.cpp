@@ -56,7 +56,7 @@ void matrix::softmax() {
     }
 
     for (u32 i = 0; i < rows * cols; i++)
-        data[i] /= sum; 
+        data[i] /= sum;
 }
 
 matrix matrix::transpose() const {
@@ -70,6 +70,7 @@ matrix matrix::transpose() const {
 matrix matrix::operator*(const matrix& other) const {
     matrix result(rows, other.cols);
     result.clear();
+    //cuda_mat_mul(data, other.data, result.data, rows, cols, other.cols);
 
     for (u32 i = 0; i < rows; i++)
         for (u32 j = 0; j < other.cols; j++)

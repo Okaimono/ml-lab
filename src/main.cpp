@@ -3,14 +3,13 @@
 #include <cstdio>
 #include <iostream>
 
-extern void cuda_check();
+extern void cuda_mat_mul(float* A, float* B, float* C, int M, int N, int P);
 
 int main() {
     mnist data;
     data.load("../data/train-images-idx3-ubyte", 
               "../data/train-labels-idx1-ubyte");
 
-    cuda_check();
     neural_network net;
     
     for (u32 epoch = 0; epoch < 10; epoch++) {
