@@ -9,6 +9,9 @@ struct mnist {
 
     void load(const char* image_path, const char* label_path);
 
+    static float* load_data(const char* image_path, int n);
+    static float* load_labels(const char* label_path, int n);
+
 private:
-    u32 reverse_bytes(u32 n);
+    static u32 reverse_bytes(u32 n);
 };
